@@ -1,0 +1,49 @@
+2121/04/07- MYSQL_1
+mysql이라는 커다란 저장소에 관련 있는 것들끼리 그룹을 나누어 관리하기로함
+거기에 database를 만들어 각각 저장할 수 있는 공간을 생성(우리가 만든 것: pbldb)
+
+user생성 
+-DB를 따로 만들지 않아도 이미 공간이 확보됨
+mysql의 경우 user와 DB의 개념이 아예 따로임
+따라서, user를 만든다고 안에 data가 들어있지는 않음
+-user : DB에 접속해서 사용하는 자(DB는 공간임)
+user table을 조회해보면 어떤 DB와 권한을 가졌는지 볼 수 있음.
+>>select user();
+
+<이것은 약속>_< 외우자!>
+-host의 개념: 이 유저가 어떤 호스트로 접속을 할 것인지(보통 localhost사용)
+create user pbl@localhost identified by 'pblpw'; -- pbl@localhost 내부에서만 사용가능한 유저생성
+create user pbl@'%' identified by 'pblpw'; -- pbl@'%' 외부에서도 사용가능한(어디서든 접속가능)
+grant all privileges on pbldb.* to 'pbl'@'localhost' with grant option;
+-- pbldb의 모든 권한을 줘라 
+grant all privileges on pbldb.* to 'pbl'@'%' with grant option;
+[또 이 권한을 줄 수 있는 계정이 권한을 부여해야 부여할 수 있다.
+ 자격안되는 계정이 권한 줘봤자라는 말씀
+root에서나 되는 거지 pbl에서 크리에이트 하면 죽어도 안된다.]
+[일단은 DB를 열고 보려기 위해서는 권한이 필요하다
+ 권한을 가지기 위해서 root계정을 사용했다.]
+
+create
+-개체를 하나씩 만들때 사용
+pw를 붙이면 비밀번호로 관리됨
+>>create user pbl@localhost identified by 'pblpw';
+>>create user pbl@'%' identified by 'pblpw';
+
+grant
+-권한부여
+DB에 들어가기 위해서는 유저에게 권한을 부여되어야만 들어갈 수 있음
+>>grant all privileges on pbldb.* to 'pbl'@'localhost' with grant option; 
+with grant option의미 : 이 DB(pbldb)에 접속할 수 있는 모든 권한을 부여한다.
+
+관계형DB
+-흔히 표라고 말하는 형식으로 DB를 관리하는 것
+표= table , 안에 들어가있는 것 = 레코드 , 1줄 = 칼럼
+
+컬럼들의 값은 대소문자 값을 구분해주자!
+값 넣을 때에 ' '홑따옴표 써주자!
+select*from employees limit 100; >limit는 100넘게 있어도 100까지만 결과를 보여줌
+
+프롬프트에서,,,
+1)일단 파일 위치 불러와서 넣고
+2) mysql -u root -p하고 비번 root치고선 그럼 죽쭉 나와
+3)확인 위해서 show tables해보기
