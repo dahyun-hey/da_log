@@ -10,7 +10,7 @@
 
 #프로그래머스 : 자릿수 더하기
 #출제 의도 인트랑 스트링
-n = input()
+n = input() #실행순서1번
 
 def solution(n): #solution함수에 n이들어가는 것을 반환해줄게 
 #n 이 이 함수의 주인공!
@@ -20,7 +20,7 @@ def solution(n): #solution함수에 n이들어가는 것을 반환해줄게
         answer += i
     return answer
 
-print(solution(n))
+print(solution(n)) #실행순서2번 : 리턴값이 튀어나옴
 
 
 
