@@ -2,8 +2,8 @@ arr = [1,1,3,3,0,2,2]
 
 a = []
 for i in arr:
-    if i not in a:
-        a.append(i)
+    if i :
+        a.append()
 print(a)
 
 
